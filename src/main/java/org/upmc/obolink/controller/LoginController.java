@@ -87,6 +87,8 @@ public class LoginController {
     @RequestMapping(value = "test", method = RequestMethod.GET)
     public ModelAndView test() {
         ModelAndView modelAndView = new ModelAndView();
+        User user = new User();
+        modelAndView.addObject("user", user);
         modelAndView.setViewName("test");
         return modelAndView;
     }

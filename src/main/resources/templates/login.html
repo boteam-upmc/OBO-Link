@@ -3,34 +3,74 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Spring Security Tutorial</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Testing Zone</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+
 </head>
 
 <body>
-<form th:action="@{/registration}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand custom" href="/">
+        <img th:src="@{/images/logo.jpeg}" width="30" height="30" alt="" class="d-inline-block align-top">
+        Obo-Link
+    </a>
+    <div class="justify-content-between">
+        <button id="signin" type="button" class="btn btn-outline-light">Sign in</button>
+        <button id="signup" type="button" class="btn btn-outline-light">Join now</button>
+    </div>
+</nav>
+
+<br/>
 
 <div class="container">
-    <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-    <form th:action="@{/login}" method="POST" class="form-signin">
-        <h3 class="form-signin-heading" th:text="Welcome"></h3>
-        <br/>
-
-        <input type="text" id="username" name="username"  th:placeholder="Username"
-               class="form-control" /> <br/>
-        <input type="password"  th:placeholder="Password"
-               id="password" name="password" class="form-control" /> <br />
-
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">Username or Password invalid, please verify</p>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form autocomplete="off" th:object="${user}" th:action="@{/login}"
+                  method="post" class="form-horizontal"
+                  role="form">
+                <h2>Sign in.</h2>
+                <div class="form-group">
+                <input type="text" id="username" name="username" th:placeholder="Username"
+                       class="form-control"/>
+                </div>
+                <div class="form-group">
+                <input type="password" th:placeholder="Password"
+                       id="password" name="password" class="form-control"/>
+                </div>
+                <div align="center" class="validation-message" th:if="${param.error}">
+                    Username or Password invalid, please verify
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-    </form>
+    </div>
 </div>
+
+<script type="text/javascript">
+    document.getElementById("signin").onclick = function () {
+        location.href = "/login";
+    };
+    document.getElementById("signup").onclick = function () {
+        location.href = "/registration";
+    };
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
