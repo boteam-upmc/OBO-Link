@@ -45,9 +45,12 @@ public class VideoController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
-
         Video video = videoService.findById(videoID);
-        modelAndView.addObject("video", video);
+        if (video.getUserId() == user.getId()) {
+            modelAndView.addObject("video", video);
+        } else {
+            modelAndView.addObject("video", new Video());
+        }
         modelAndView.setViewName("play");
         return modelAndView;
     }
