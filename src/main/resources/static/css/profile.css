@@ -1,0 +1,12 @@
+body {
+    background-color: dimgray;
+    color: white;
+}
+
+.validation-message {
+    color: orangered;
+}
+
+h1 {
+    color: red;
+}

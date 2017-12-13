@@ -20,13 +20,20 @@ public class ProfileController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
-    public ModelAndView profile() {
+    @RequestMapping(value = {"/profile/delete"}, method = RequestMethod.GET)
+    public ModelAndView profileDelete() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
         userService.removeUser(user);
         modelAndView.setViewName("redirect:/logout");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
+    public ModelAndView profile() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("profile");
         return modelAndView;
     }
 }

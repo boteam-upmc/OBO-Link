@@ -20,8 +20,8 @@
         Obo-Link
     </a>
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Profile</a>
+        <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
         </li>
     </ul>
     <div class="justify-content-between">
@@ -51,6 +51,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
+
+<script>
+    document.getElementById("logout").onclick = function () {
+        location.href = "/logout";
+    };
+</script>
 </body>
 
 </html>
