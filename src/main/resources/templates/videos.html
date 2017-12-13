@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Videos</title>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/videos.css}"/>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand custom" href="/">
+        <img th:src="@{/images/logo.jpeg}" width="30" height="30" alt="" class="d-inline-block align-top">
+        Obo-Link
+    </a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Profile</a>
+        </li>
+    </ul>
+    <div class="justify-content-between">
+        <button onclick="" id="logout" type="button" class="btn btn-outline-light">Logout</button>
+    </div>
+</nav>
+
+<br/>
+
+<div class="container">
+    <div id="list" class="row">
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <video width="320" height="240" controls>
+                    <source id="source" src="/resources/video.mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+
+<script th:inline="javascript">
+    var videos = /*[[${videos}]]*/ 'videos';
+    for (var i = 0; i < videos.length; i++) {
+        var s = '<div class="col-3">'
+            + '<div class = "thumbnail">'
+            + '<a href="/videos/' + videos[i].id + '">'
+            + '<img src=' + videos[i].imageURL + ' alt=' + videos[i].title + ' >'
+            + '<div class="caption">'+ videos[i].title + ' - ' + videos[i].duration + '</div>'
+            + '</div> </div>';
+        document.getElementById('list').innerHTML += s;
+    }
+
+    document.getElementById("logout").onclick = function () {
+        location.href = "/login";
+    };
+
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

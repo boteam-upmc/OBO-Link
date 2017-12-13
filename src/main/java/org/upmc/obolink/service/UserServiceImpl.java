@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         userRepository.save(user);
     }
+
+    @Override
+    public void removeUser(User user) {
+        userRepository.delete(user);
+    }
 }

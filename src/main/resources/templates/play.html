@@ -3,17 +3,15 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Login</title>
+    <title>Videos</title>
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
           crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-
+    <link rel="stylesheet" type="text/css" th:href="@{/css/videos.css}"/>
 </head>
-
 <body>
 
 <nav class="navbar navbar-dark bg-dark">
@@ -21,9 +19,13 @@
         <img th:src="@{/images/logo.jpeg}" width="30" height="30" alt="" class="d-inline-block align-top">
         Obo-Link
     </a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Profile</a>
+        </li>
+    </ul>
     <div class="justify-content-between">
-        <button id="signin" type="button" class="btn btn-outline-light">Sign in</button>
-        <button id="signup" type="button" class="btn btn-outline-light">Join now</button>
+        <button onclick="" id="logout" type="button" class="btn btn-outline-light">Logout</button>
     </div>
 </nav>
 
@@ -32,35 +34,14 @@
 <div class="container">
     <div class="row">
         <div class="col-6 offset-3">
-            <form autocomplete="off" th:object="${user}" th:action="@{/login}"
-                  method="post" class="form-horizontal"
-                  role="form">
-                <h2>Sign in.</h2>
-                <div class="form-group">
-                <input type="text" id="username" name="username" th:placeholder="Username"
-                       class="form-control"/>
-                </div>
-                <div class="form-group">
-                <input type="password" th:placeholder="Password"
-                       id="password" name="password" class="form-control"/>
-                </div>
-                <div align="center" class="validation-message" th:if="${param.error}">
-                    Username or Password invalid, please verify
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </form>
+
+                <video id="vid" th:src="${video.videoURL}" controls>
+                Your browser does not support the video tag.
+            </video>
         </div>
     </div>
 </div>
 
-<script type="text/javascript">
-    document.getElementById("signin").onclick = function () {
-        location.href = "/login";
-    };
-    document.getElementById("signup").onclick = function () {
-        location.href = "/registration";
-    };
-</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
