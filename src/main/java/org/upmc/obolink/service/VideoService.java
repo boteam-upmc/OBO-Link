@@ -7,4 +7,5 @@ import java.util.List;
 public interface VideoService {
     List<Video> findByUserId(int id);
     Video findById(int videoID);
+    List<Video> findByUserIdAndRobotId(int id, int robotId);
 }

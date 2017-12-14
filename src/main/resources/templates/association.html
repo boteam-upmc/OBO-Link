@@ -61,7 +61,7 @@
     //var robots = /*[[${robots}]]*/ 'robots';
     var userRobots = /*[[${userRobots}]]*/ 'userRobots';
     for (var i = 0; i < userRobots.length; i++) {
-        var s = '<li class="col-6 offset-3 list-group-item d-flex justify-content-between align-items-center">'
+        var s = '<li value="' + userRobots[i].robotId + '" class="col-6 offset-3 list-group-item d-flex justify-content-between align-items-center ">'
             + userRobots[i].robotId;
         if (userRobots[i].associated === true) {
             s += '<button id="dissociate" value="' + userRobots[i].robotId + '" type="button" class="btn btn-info">Dissociate</button>';
@@ -96,6 +96,10 @@
                     location.reload();
                 });
         }
+    });
+
+    $(document).on('click', 'li', function () {
+        location.href = "videos/" + $(this).val();
     });
 </script>
 

@@ -50,10 +50,11 @@
 
 <script th:inline="javascript">
     var videos = /*[[${videos}]]*/ 'videos';
+    var robotId = /*[[${robotId}]]*/ 'robotId';
     for (var i = 0; i < videos.length; i++) {
         var s = '<div class="col-3">'
             + '<div class = "thumbnail">'
-            + '<a href="/videos/' + videos[i].id + '">'
+            + '<a href="/videos/' + robotId + "/" + videos[i].id + '">'
             + '<img src=' + videos[i].imageURL + ' alt=' + videos[i].title + ' >'
             + '<div class="caption">'+ videos[i].title + ' - ' + videos[i].duration + '</div>'
             + '</a></div> </div>';

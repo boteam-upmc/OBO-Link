@@ -6,8 +6,19 @@ body {
 .list-group-item {
     background-color: lightgrey;
     color: black;
+    margin-bottom: 5px;
+    border-radius: 3px;
 }
 
 .associate {
     margin-right: 5px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: white;
+    cursor: pointer;
 }

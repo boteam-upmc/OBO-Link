@@ -25,4 +25,9 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Video findById(int videoID) { return videoRepository.findById(videoID);
     }
+
+    @Override
+    public List<Video> findByUserIdAndRobotId(int id, int robotId) {
+        return videoRepository.findByUserIdAndRobotId(id, robotId);
+    }
 }

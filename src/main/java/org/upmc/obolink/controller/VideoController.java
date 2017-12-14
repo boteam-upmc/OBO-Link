@@ -28,19 +28,20 @@ public class VideoController {
         this.videoService = videoService;
     }
 
-    @RequestMapping(value = "videos", method = RequestMethod.GET)
-    public ModelAndView videos() {
+    @RequestMapping(value = "videos/{robotID}", method = RequestMethod.GET)
+    public ModelAndView videos(@PathVariable int robotID) {
         ModelAndView modelAndView = new ModelAndView();
         List<Video> videos;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
-        videos = videoService.findByUserId(user.getId());
+        videos = videoService.findByUserIdAndRobotId(user.getId(), robotID);
         modelAndView.addObject("videos", videos);
+        modelAndView.addObject("robotId", robotID);
         modelAndView.setViewName("videos");
         return modelAndView;
     }
 
-    @RequestMapping(value = "videos/{videoID}", method = RequestMethod.GET)
+    @RequestMapping(value = "videos/{robotID}/{videoID}", method = RequestMethod.GET)
     public ModelAndView videosID(@PathVariable int videoID) {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
