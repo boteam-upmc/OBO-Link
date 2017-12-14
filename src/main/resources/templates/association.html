@@ -34,6 +34,8 @@
 
 <div class="container">
 
+    <div class="alertNoAssociation" id="alertNoAssociation"></div>
+
     <h1>Robots</h1>
 
 </div>
@@ -61,11 +63,14 @@
     //var robots = /*[[${robots}]]*/ 'robots';
     var userRobots = /*[[${userRobots}]]*/ 'userRobots';
     for (var i = 0; i < userRobots.length; i++) {
-        var s = '<li value="' + userRobots[i].robotId + '" class="col-6 offset-3 list-group-item d-flex justify-content-between align-items-center ">'
-            + userRobots[i].robotId;
+        var s;
         if (userRobots[i].associated === true) {
+        s = '<li value="' + userRobots[i].robotId + '" class="col-6 offset-3 list-group-item d-flex justify-content-between align-items-center ">'
+            + userRobots[i].robotId;
             s += '<button id="dissociate" value="' + userRobots[i].robotId + '" type="button" class="btn btn-info">Dissociate</button>';
         } else {
+            s = '<li value="' + -1 + '" class="col-6 offset-3 list-group-item d-flex justify-content-between align-items-center ">'
+                + userRobots[i].robotId;
             s += '<div>'
                 + '<button id="associate" value="' + userRobots[i].robotId + '" type="button" class="btn btn-info associate">Associate</button>'
                 + '<button id="dismiss"  value="' + userRobots[i].robotId + '" type="button" class="btn btn-info">Dismiss</button>'
@@ -98,8 +103,12 @@
         }
     });
 
-    $(document).on('click', 'li', function () {
-        location.href = "videos/" + $(this).val();
+    $(document).on('click', 'li', function (e) {
+        if(e.target == "[object HTMLLIElement]") {
+            if ($(this).val() !== -1) {
+                location.href = "videos/" + $(this).val();
+            }
+        }
     });
 </script>
 
