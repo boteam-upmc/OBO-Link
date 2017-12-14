@@ -28,7 +28,7 @@ public class LoginController {
     public ModelAndView login() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
-            return new ModelAndView("redirect:/videos");
+            return new ModelAndView("redirect:/association");
         }
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -39,7 +39,7 @@ public class LoginController {
     public ModelAndView registration() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
-            return new ModelAndView("redirect:/videos");
+            return new ModelAndView("redirect:/association");
         }
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();

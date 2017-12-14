@@ -27,17 +27,11 @@ public class Video {
     @NotEmpty
     private String videoURL;
 
-
-
-    //@JoinColumn(name = "user_id", table = "user")
     @Column(name = "user_id")
-    //@OneToOne
     @NotEmpty
     private int userId;
 
-    //@JoinColumn(name = "robot_id", table = "robot")
     @Column(name = "robot_id")
-    //@OneToOne
     @NotEmpty
     private int robotId;
 

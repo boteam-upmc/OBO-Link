@@ -46,7 +46,7 @@ public class VideoController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
         Video video = videoService.findById(videoID);
-        if (video.getUserId() == user.getId()) {
+        if (video != null && video.getUserId() == user.getId()) {
             modelAndView.addObject("video", video);
         } else {
             modelAndView.addObject("video", new Video());

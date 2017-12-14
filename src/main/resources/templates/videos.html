@@ -32,6 +32,14 @@
 <br/>
 
 <div class="container">
+
+    <h1>Videos</h1>
+
+</div>
+
+<br/>
+
+<div class="container">
     <div id="list" class="row">
     </div>
 </div>
@@ -48,14 +56,13 @@
             + '<a href="/videos/' + videos[i].id + '">'
             + '<img src=' + videos[i].imageURL + ' alt=' + videos[i].title + ' >'
             + '<div class="caption">'+ videos[i].title + ' - ' + videos[i].duration + '</div>'
-            + '</div> </div>';
+            + '</a></div> </div>';
         document.getElementById('list').innerHTML += s;
     }
 
     document.getElementById("logout").onclick = function () {
         location.href = "/logout";
     };
-
 </script>
 
 

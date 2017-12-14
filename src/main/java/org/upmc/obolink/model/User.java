@@ -50,6 +50,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    /*
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_robot",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "robot_id"))
+    private Set<Robot> robots;
+    */
+
     public int getId() {
         return id;
     }
@@ -121,4 +129,14 @@ public class User {
     public void setActive(int active) {
         this.active = active;
     }
+
+    /*
+    public Set<Robot> getRobots() {
+        return robots;
+    }
+
+    public void setRobots(Set<Robot> robots) {
+        this.robots = robots;
+    }
+    */
 }
