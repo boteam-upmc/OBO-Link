@@ -38,9 +38,9 @@ public class RobotController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
         List<RobotUser> userRobots = robotUserService.findByUserId(user.getId());
-        List<Robot> robots = robotService.findByUserRobots(userRobots);
+        //List<Robot> robots = robotService.findByUserRobots(userRobots);
         modelAndView.addObject("userRobots", userRobots);
-        modelAndView.addObject("robots", robots);
+        //modelAndView.addObject("robots", robots);
         modelAndView.setViewName("association");
         return modelAndView;
     }

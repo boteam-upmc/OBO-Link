@@ -32,6 +32,12 @@
 <br/>
 
 <div class="container">
+    <h1 th:text="${video.title} + ' - ' + ${video.duration}"></h1>
+</div>
+
+<br/>
+
+<div class="container">
     <div class="row">
         <div class="col-6 offset-3">
                 <video id="vid" th:src="${video.videoURL}" controls>
