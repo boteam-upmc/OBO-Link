@@ -14,11 +14,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
+
+/**
+ * This class manage the security of the website.
+ *
+ * @author Boteam
+ * @version 1.0
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
     private final DataSource dataSource;
 
     @Value("${spring.queries.users-query}")
@@ -33,6 +39,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
+    /**
+     * Configure the authentication.
+     *
+     * @param authenticationManagerBuilder
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
             throws Exception {
@@ -43,6 +55,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(bCryptPasswordEncoder);
     }
 
+    /**
+     * Configure what can be seen by the users.
+     *
+     * @param httpSecurity
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
@@ -66,6 +84,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/access-denied");
     }
 
+    /**
+     * Configure what resources can be accessed by the users.
+     * @param webSecurity
+     * @throws Exception
+     */
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
         webSecurity

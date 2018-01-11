@@ -6,6 +6,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ *This class manage the location of the resources.
+ *
+ * @author boteam
+ * @version 1.0
+ */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     private static String ressourcesPathA = "/Users/Steven/";

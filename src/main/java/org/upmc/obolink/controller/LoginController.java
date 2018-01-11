@@ -14,6 +14,12 @@ import org.upmc.obolink.service.UserService;
 
 import javax.validation.Valid;
 
+/**
+ * The controller who will handle everything associated white the login and registration.
+ *
+ * @author boteam
+ * @version 1.0
+ */
 @Controller
 public class LoginController {
 
@@ -24,6 +30,14 @@ public class LoginController {
         this.userService = userService;
     }
 
+    /**
+     * Handle the request GET when accessing the "/" or the "/login" page of the website.
+     *
+     * @return If the user is not logged, it will return login.html.
+     * If the user is logged, then he will be redirected to "/association"
+     *
+     * @see RobotController#assoc()
+     */
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -35,6 +49,14 @@ public class LoginController {
         return modelAndView;
     }
 
+    /**
+     * Handle the request GET when accessing "/registration" page of the website.
+     *
+     * @return If the user is not logged, it will return registration.html.
+     * If the user is logged, then he will be redirected to "/association"
+     *
+     * @see RobotController#assoc()
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -48,6 +70,16 @@ public class LoginController {
         return modelAndView;
     }
 
+    /**
+     * Handle the request POST send by the registration form. If the data filed by the user is good,
+     * a new User will be created.
+     *
+     * @param user The form data filed by the user.
+     * @param bindingResult Allow to send errors to the user.
+     * @return Send a success message or errors to the user to be display.
+     *
+     * @see User
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -68,37 +100,28 @@ public class LoginController {
         return modelAndView;
     }
 
+    /**
+     *  Handle the request GET when accessing "/admin/home" page of the website.
+     *
+     * @return If the user is logged has an admin, home/admin.html will be send.
+     */
     @RequestMapping(value="/admin/home", method = RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findByUsername(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getFirstName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
 
-    @RequestMapping(value="success", method = RequestMethod.GET)
-    public ModelAndView loginSuccess() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("success");
-        return modelAndView;
-    }
-
+    /**
+     * Handle the request GET when accessing "/admin/home" page of the website. Most of the time,
+     * the user will be redirected to this page when he tries to access a forbidden web page.
+     *
+     * @return access-denied.html
+     */
     @RequestMapping(value = "access-denied", method = RequestMethod.GET)
     public ModelAndView accessDenied() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("access-denied");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-    public ModelAndView test() {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("test");
         return modelAndView;
     }
 }

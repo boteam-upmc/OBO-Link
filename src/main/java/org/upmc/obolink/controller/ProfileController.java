@@ -10,6 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.upmc.obolink.model.User;
 import org.upmc.obolink.service.UserService;
 
+/**
+ * The controller who will handle everything associated with the profile.
+ *
+ * @author boteam
+ * @version 1.0
+ */
 @Controller
 public class ProfileController {
 
@@ -20,6 +26,14 @@ public class ProfileController {
         this.userService = userService;
     }
 
+
+    /**
+     * Handle the request GET when accessing the "/profile/delete" of the website. Most of the time,
+     * the user will be redirected to this page when he clicks on the delete button in the profile.
+     * It will remove the User of the website.
+     *
+     * @return The user will be redirected to "/logout".
+     */
     @RequestMapping(value = {"/profile/delete"}, method = RequestMethod.GET)
     public ModelAndView profileDelete() {
         ModelAndView modelAndView = new ModelAndView();
@@ -30,6 +44,11 @@ public class ProfileController {
         return modelAndView;
     }
 
+    /**
+     * Handle the request GET when accessing the "/profile"
+     *
+     * @return profile.html
+     */
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
     public ModelAndView profile() {
         ModelAndView modelAndView = new ModelAndView();
