@@ -17,6 +17,12 @@ import org.upmc.obolink.service.VideoService;
 import java.io.File;
 import java.util.List;
 
+/**
+ * The controller who will handle everything associated with the videos.
+ *
+ * @author boteam
+ * @version 1.0
+ */
 @Controller
 public class VideoController {
 
@@ -30,6 +36,12 @@ public class VideoController {
         this.videoService = videoService;
     }
 
+    /**
+     *  Handle the request GET when accessing the "/videos/{robotId}" page of the website.
+     *  Get all the videos who are associated with the user and the robot.
+     *
+     * @return videos.html and the videos list for the user and the robot.
+     */
     @RequestMapping(value = "videos/{robotID}", method = RequestMethod.GET)
     public ModelAndView videos(@PathVariable int robotID) {
         ModelAndView modelAndView = new ModelAndView();
@@ -43,6 +55,12 @@ public class VideoController {
         return modelAndView;
     }
 
+    /**
+     *  Handle the request GET when accessing the "/videos/{robotId}/{videoId}" page of the website.
+     *  Get the video selected by the user.
+     *
+     * @return play.html and the video.
+     */
     @RequestMapping(value = "videos/{robotID}/{videoID}", method = RequestMethod.GET)
     public ModelAndView videosID(@PathVariable int videoID) {
         ModelAndView modelAndView = new ModelAndView();
@@ -58,6 +76,12 @@ public class VideoController {
         return modelAndView;
     }
 
+    /**
+     *  Handle the request GET when accessing the "/videos/{robotId}/delete" page of the website.
+     *  Delete de video if the user didn't exceed the limit alpha.
+     *
+     * @return Redirect to videos/{RobotID} if it has been deleted, if not redirect to videos/{robotID}/{}
+     */
     @RequestMapping(value = "videos/{robotID}/{videoID}/delete", method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int robotID, @PathVariable int videoID) {
         ModelAndView modelAndView = new ModelAndView();
