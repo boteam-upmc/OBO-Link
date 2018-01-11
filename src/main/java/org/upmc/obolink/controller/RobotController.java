@@ -71,6 +71,4 @@ public class RobotController {
         modelAndView.setViewName("association");
         return modelAndView;
     }
-
-
 }

@@ -81,7 +81,29 @@
     }
 </script>
 
-<script>
+<script th:inline="javascript">
+
+    function update(userRobots) {
+        document.getElementById('list').innerHTML += "";
+        for (var i = 0; i < userRobots.length; i++) {
+            var s;
+            if (userRobots[i].associated === true) {
+                s = '<li value="' + userRobots[i].robotId + '" class="col-6 offset-3 list-group-item d-flex justify-content-between align-items-center ">'
+                    + userRobots[i].robotId;
+                s += '<button id="dissociate" value="' + userRobots[i].robotId + '" type="button" class="btn btn-info">Dissociate</button>';
+            } else {
+                s = '<li value="' + -1 + '" class="col-6 offset-3 list-group-item d-flex justify-content-between align-items-center ">'
+                    + userRobots[i].robotId;
+                s += '<div>'
+                    + '<button id="associate" value="' + userRobots[i].robotId + '" type="button" class="btn btn-info associate">Associate</button>'
+                    + '<button id="dismiss"  value="' + userRobots[i].robotId + '" type="button" class="btn btn-info">Dismiss</button>'
+                    + '</div>';
+            }
+            s += '</li>';
+            document.getElementById('list').innerHTML += s;
+        }
+    }
+
     $(document).on('click', 'button', function () {
         if (this.id === "logout") {
             location.href = "/logout";
@@ -89,15 +111,13 @@
             $.post('associate',
                 {"id": $(this).val()},
                 function () {
-                    //update();
+                    //update(userRobots);
                     location.reload();
                 });
         } else if (this.id === "dissociate" || this.id === "dismiss") {
             $.post('dissociate',
                 {"id": $(this).val()},
                 function () {
-                    //update();
-                    //TODO WESS TA VU LA FO FAIR DU AJAX PUR ACTUALIZER
                     location.reload();
                 });
         }
@@ -110,6 +130,16 @@
             }
         }
     });
+
+    function sync() {
+        $.post('associate',
+            {"id": $(this).val()},
+            function (data) {
+                //update(data);
+                alert(data);
+                location.reload();
+            });
+    }
 </script>
 
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.upmc.obolink.model.Video;
 import org.upmc.obolink.repository.VideoRepository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service("videoService")
@@ -28,6 +29,12 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public List<Video> findByUserIdAndRobotId(int id, int robotId) {
-        return videoRepository.findByUserIdAndRobotId(id, robotId);
+        Timestamp date = new Timestamp(System.currentTimeMillis()- (24 * 60 * 60 * 1000));
+        return videoRepository.findByUserIdAndRobotIdAndCreationDateIsAfter(id, robotId, date);
+    }
+
+    @Override
+    public void removeVideo(Video video) {
+        videoRepository.delete(video);
     }
 }

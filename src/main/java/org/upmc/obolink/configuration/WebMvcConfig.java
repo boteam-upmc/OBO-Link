@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
+    private static String ressourcesPathA = "/Users/Steven/";
+    private static String ressourcesPathB = "resources/";
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -17,6 +19,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/", "file:/Users/Steven/resources/");
+                .addResourceLocations("/resources/", "file:"+ressourcesPathA+ressourcesPathB);
+    }
+
+    public static String getRessourcesPathA() {
+        return ressourcesPathA;
+    }
+
+    public static String getRessourcesPathB() {
+        return ressourcesPathB;
     }
 }

@@ -3,6 +3,7 @@ package org.upmc.obolink.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "video")
@@ -39,6 +40,9 @@ public class Video {
     @Column(name = "duration")
     @NotEmpty
     private String duration;
+
+    @Column(name = "creation_date")
+    private Timestamp creationDate;
 
     public String getVideoURL() {
         return videoURL;
@@ -102,5 +106,13 @@ public class Video {
 
     public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 }

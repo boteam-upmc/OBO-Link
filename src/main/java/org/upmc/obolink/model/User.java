@@ -44,6 +44,12 @@ public class User {
     @Column(name = "active")
     private int active;
 
+    @Column(name = "number_of_videos_taken")
+    private int numberOfVideosTaken;
+
+    @Column(name = "number_of_videos_deleted")
+    private int numberOfVideosDeleted;
+
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -128,6 +134,22 @@ public class User {
 
     public void setActive(int active) {
         this.active = active;
+    }
+
+    public int getNumberOfVideosTaken() {
+        return numberOfVideosTaken;
+    }
+
+    public void setNumberOfVideosTaken(int numberOfVideosTaken) {
+        this.numberOfVideosTaken = numberOfVideosTaken;
+    }
+
+    public int getNumberOfVideosDeleted() {
+        return numberOfVideosDeleted;
+    }
+
+    public void setNumberOfVideosDeleted(int numberOfVideosDeleted) {
+        this.numberOfVideosDeleted = numberOfVideosDeleted;
     }
 
     /*
