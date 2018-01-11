@@ -1,0 +1,6 @@
+org.upmc.obolink
+org.upmc.obolink.configuration
+org.upmc.obolink.controller
+org.upmc.obolink.model
+org.upmc.obolink.repository
+org.upmc.obolink.service
