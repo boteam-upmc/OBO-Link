@@ -14,6 +14,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
+/**
+ * The implementation of the user Service.
+ */
 @Service("userService")
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -29,11 +32,22 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
+    /**
+     * Search in the database for a user by is name.
+     * @param username the name of the user.
+     * @return a user
+     * @see User
+     */
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Add a user in the database.
+     * @param user the user
+     * @see User
+     */
     @Override
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -44,6 +58,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Remove a user from the database.
+     * @param user the user
+     * @see User
+     */
     @Override
     public void removeUser(User user) {
         userRepository.delete(user);

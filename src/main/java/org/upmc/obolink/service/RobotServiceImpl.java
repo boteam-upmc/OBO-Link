@@ -9,7 +9,9 @@ import org.upmc.obolink.repository.RobotRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The implementation of the robot service.
+ */
 @Service("robotService")
 public class RobotServiceImpl implements RobotService {
     private final RobotRepository robotRepository;
@@ -20,17 +22,16 @@ public class RobotServiceImpl implements RobotService {
     }
 
 
+    /**
+     *  Search in the database a robot with his id.
+     *
+     * @param robotId The id of the robot
+     * @return The robot found
+     * @see Robot
+     */
     @Override
     public Robot findById(int robotId) {
         return robotRepository.findById(robotId);
     }
 
-    @Override
-    public List<Robot> findByUserRobots(List<RobotUser> userRobots) {
-        List<Robot> robots = new ArrayList<>();
-        for (RobotUser userRobot : userRobots) {
-            robots.add(robotRepository.findById(userRobot.getRobotId()));
-        }
-        return robots;
-    }
 }
