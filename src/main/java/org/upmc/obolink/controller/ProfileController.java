@@ -7,8 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.upmc.obolink.configuration.WebMvcConfig;
 import org.upmc.obolink.model.User;
+import org.upmc.obolink.model.Video;
 import org.upmc.obolink.service.UserService;
+import org.upmc.obolink.service.VideoService;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * The controller who will handle everything associated with the profile.
@@ -20,10 +26,12 @@ import org.upmc.obolink.service.UserService;
 public class ProfileController {
 
     private final UserService userService;
+    private final VideoService videoService;
 
     @Autowired
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService, VideoService videoService) {
         this.userService = userService;
+        this.videoService = videoService;
     }
 
 
@@ -41,6 +49,20 @@ public class ProfileController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
+        List<Video> videoList = videoService.findByUserId(user.getId());
+        for (int i = 0; i < videoList.size(); i++) {
+            Video video = videoList.get(i);
+            try{
+                File file = new File(WebMvcConfig.getRessourcesPathA() + video.getVideoURL());
+                File file2 = new File(WebMvcConfig.getRessourcesPathA() + video.getImageURL());
+                if(!file.delete() || !file2.delete()) {
+                    System.out.println("Delete operation failed for one video.");
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            videoService.removeVideo(video);
+        }
         userService.removeUser(user);
         modelAndView.setViewName("redirect:/logout");
         return modelAndView;

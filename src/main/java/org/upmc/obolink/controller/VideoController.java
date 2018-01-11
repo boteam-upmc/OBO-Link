@@ -88,8 +88,6 @@ public class VideoController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
         Video video = videoService.findById(videoID);
-        System.out.println(user.getNumberOfVideosDeleted() + "-" + user.getNumberOfVideosTaken() + "-"
-        + user.getAlpha());
         if (video != null && video.getUserId() == user.getId()
                 && ((user.getNumberOfVideosDeleted()  * 100) / user.getNumberOfVideosTaken()) < user.getAlpha()) {
             user.setNumberOfVideosDeleted(user.getNumberOfVideosDeleted() + 1);
