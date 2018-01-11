@@ -15,7 +15,7 @@ import org.upmc.obolink.service.UserService;
 import javax.validation.Valid;
 
 /**
- * The controller who will handle everything associated white the login and registration.
+ * The controller who will handle everything associated with the login and registration.
  *
  * @author boteam
  * @version 1.0

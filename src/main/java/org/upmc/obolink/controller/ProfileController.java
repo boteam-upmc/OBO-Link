@@ -33,6 +33,8 @@ public class ProfileController {
      * It will remove the User of the website.
      *
      * @return The user will be redirected to "/logout".
+     *
+     * @see User
      */
     @RequestMapping(value = {"/profile/delete"}, method = RequestMethod.GET)
     public ModelAndView profileDelete() {

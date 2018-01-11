@@ -18,33 +18,47 @@ import org.upmc.obolink.service.UserService;
 
 import java.util.List;
 
+/**
+ * The controller who will handle everything associated with the login and registration.
+ *
+ * @author boteam
+ * @version 1.0
+ */
 @Controller
 public class RobotController {
-
     private final UserService userService;
     private final RobotUserService robotUserService;
-    private final RobotService robotService;
 
     @Autowired
     public RobotController(UserService userService, RobotUserService robotUserService, RobotService robotService) {
         this.userService = userService;
         this.robotUserService = robotUserService;
-        this.robotService = robotService;
     }
 
+    /**
+     *  Handle the request GET when accessing the "/association" page of the website.
+     *  Get all the robots who are associated with the user.
+     *
+     * @return association.html and the RobotUser list for the user.
+     */
     @RequestMapping(value = "association", method = {RequestMethod.GET})
     public ModelAndView assoc() {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
         List<RobotUser> userRobots = robotUserService.findByUserId(user.getId());
-        //List<Robot> robots = robotService.findByUserRobots(userRobots);
         modelAndView.addObject("userRobots", userRobots);
-        //modelAndView.addObject("robots", robots);
         modelAndView.setViewName("association");
         return modelAndView;
     }
 
+    /**
+     * Handle the request POST for "/associate". It's called when the user accept the association with the robot.
+     * The association RobotUser is set to associated in the database.
+     *
+     * @param idRobot The id of the robot.
+     * @return association.html
+     */
     @RequestMapping(value = "associate", method = RequestMethod.POST)
     public ModelAndView associate(@RequestParam("id") int idRobot) {
         ModelAndView modelAndView = new ModelAndView();
@@ -59,6 +73,14 @@ public class RobotController {
         return modelAndView;
     }
 
+    /**
+     * Handle the request POST for "/dissociate". It's called when the user want to delete or
+     * refuse the association with the robot.
+     * The association RobotUser is deleted from the database.
+     *
+     * @param idRobot The id of the robot.
+     * @return association.html
+     */
     @RequestMapping(value = "dissociate", method = RequestMethod.POST)
     public ModelAndView dissociate(@RequestParam("id") int idRobot) {
         ModelAndView modelAndView = new ModelAndView();
