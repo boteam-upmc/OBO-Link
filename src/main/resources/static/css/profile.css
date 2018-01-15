@@ -7,7 +7,7 @@ body {
     color: orangered;
 }
 
-h1 {
+h1.danger {
     color: red;
 }
 

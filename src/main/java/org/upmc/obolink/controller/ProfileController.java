@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.upmc.obolink.configuration.WebMvcConfig;
+import org.upmc.obolink.model.RobotUser;
 import org.upmc.obolink.model.User;
 import org.upmc.obolink.model.Video;
+import org.upmc.obolink.service.RobotUserService;
 import org.upmc.obolink.service.UserService;
 import org.upmc.obolink.service.VideoService;
 
@@ -27,11 +29,13 @@ public class ProfileController {
 
     private final UserService userService;
     private final VideoService videoService;
+    private final RobotUserService robotUserService;
 
     @Autowired
-    public ProfileController(UserService userService, VideoService videoService) {
+    public ProfileController(UserService userService, VideoService videoService, RobotUserService robotUserService) {
         this.userService = userService;
         this.videoService = videoService;
+        this.robotUserService = robotUserService;
     }
 
 
@@ -62,6 +66,10 @@ public class ProfileController {
                 e.printStackTrace();
             }
             videoService.removeVideo(video);
+        }
+        List<RobotUser> l = robotUserService.findByUserId(user.getId());
+        for (RobotUser aL : l) {
+            robotUserService.removeUserRobots(aL);
         }
         userService.removeUser(user);
         modelAndView.setViewName("redirect:/logout");
