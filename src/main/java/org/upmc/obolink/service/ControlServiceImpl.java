@@ -9,6 +9,9 @@ import org.upmc.obolink.model.User;
 import org.upmc.obolink.repository.RobotRepository;
 import org.upmc.obolink.repository.RobotUserRepository;
 
+/**
+ * The implementation of remote robot control service.
+ */
 @Service("controlService")
 public class ControlServiceImpl implements ControlService {
 
@@ -21,6 +24,12 @@ public class ControlServiceImpl implements ControlService {
         this.robotUserRepository = robotUserRepository;
     }
 
+    /**
+     * Check the association between the robot and the user
+     * @param robotId number that identifies the robot.
+     * @param user the user id.
+     * @return returns true if user and robot are well associated. False otherwise
+     */
     @Override
     public Boolean checkRobotAndAssociation(int robotId, User user) {
         Boolean check = false;

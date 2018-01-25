@@ -11,6 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.upmc.obolink.model.User;
 import org.upmc.obolink.service.*;
 
+/**
+ * The controller that will manage the remote control of the robot.
+ *
+ * @author boteam
+ * @version 1.0
+ */
 @Controller
 public class ControlController {
 
@@ -23,7 +29,12 @@ public class ControlController {
         this.userService = userService;
     }
 
-
+    /**
+     * Handle the request Get for "/control/"
+     * Allow accesses the Robot Control Page and Live Robot Visual.
+     * @param robotID number that identifies the robot.
+     * @return controlRobotLive.html
+     */
     @RequestMapping(value = {"/control/{robotID}"}, method = RequestMethod.GET)
     public ModelAndView control(@PathVariable int robotID) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
