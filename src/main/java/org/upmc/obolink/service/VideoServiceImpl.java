@@ -59,6 +59,6 @@ public class VideoServiceImpl implements VideoService {
      */
     @Override
     public void removeVideo(Video video) {
-        videoRepository.delete(video);
+        videoRepository.  delete(video);
     }
 }

@@ -16,6 +16,7 @@ public class Robot {
      * The robot id.
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "robot_id")
     private int id;
 

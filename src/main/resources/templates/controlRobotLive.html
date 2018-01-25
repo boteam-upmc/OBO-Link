@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>LiveStream </title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/controlRobotLive.css}" media="screen" />
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand custom" href="/">
+        <img th:src="@{/images/logo.jpeg}" width="30" height="30" alt="" class="d-inline-block align-top">
+        Obo-Link
+    </a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/profile}">Profile</a>
+        </li>
+    </ul>
+    <div class="justify-content-between">
+        <button onclick="" id="logout" type="button" class="btn btn-outline-light">Logout</button>
+    </div>
+</nav>
+
+<div id="main">
+	<div class="container-fluid">
+		<div class="row top">
+
+			<!--<section id="options" class="col-md-2" >
+				<table> -->
+						<!--  Cases to chose the touch who drive the robot  -->
+					<!--<tr>
+						<td>Forward: </td>
+						<td><input id="forW" type="text" size="5" maxlength="1"/></td>
+					</tr>
+
+					<tr>
+						<td>Right: </td>
+						<td><input id="R" type="text" size="5" maxlength="1"/></td>
+					</tr>
+
+					<tr>
+						<td>Left: </td>
+						<td><input id="L" type="text" size="5" maxlength="1"/></td>
+					</tr>
+
+					<tr>
+						<td>Backward: </td>
+						<td><input id="backW" type="text" size="5" maxlength="1"/></td>
+					</tr>
+
+					<tr>
+						<td size="10">Stop: </td>
+						<td><input id="S" type="text" size="5" maxlength="1"/></td>
+					</tr>
+
+					<tr>
+						<td>Reset P/T:</td>
+						<td><input id="RES" type="text" size="5" maxlength="1"/></td>
+					</tr>
+				</table>
+		    </section>-->
+
+			<section id="live" class="col-md-7 offset-md-2">
+				<div class="row video">
+					<div class="offset-md-0">
+						<video th:src="@{~/videos/cr7.mp4}" controls>
+							Your browser does not support the video tag. 
+						</video> 
+					</div>
+
+				</div>
+			</section>
+
+			<aside id="data" class="col-md-3">
+					<table class="tableData">
+						<tr>
+							<td class="col-md-6 infos">Gaps</td>
+							<td class="col-md-6 infos" >1 0 0 0</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">Falls</td>
+							<td class="col-md-6 infos" >0 0 0 0</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">IRs</td>
+							<td class="col-md-6 infos">24 7 6 4 31 56 35 33 8</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">Pan</td>
+							<td class="col-md-6 infos">6 92 0</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">Tilt</td>
+							<td class="col-md-6 infos">0 4 71600</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">Left</td>
+							<td class="col-md-6 infos">55 0 0</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">Right</td>
+							<td class="col-md-6 infos">40 0 0</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">Battery</td>
+							<td class="col-md-6 infos">702</td>
+						</tr>
+						<tr>
+							<td class="col-md-6 infos">Last status</td>
+							<td class="col-md-6 infos">Thu Jun 02 16:32:05 CEST 2016</td>
+						</tr>
+					</table>
+			</aside>
+
+		</div>
+
+		<div class="row">
+
+			<section id="Configuration" class="col-md-3">
+				<table class="col-md-12">
+					<tr>
+						<td><div class="undertitleConfiguration">Ang. vel ( <span id="angVelResult" >0</span> )</div></td>
+						<td><input id="angVel" class="case" size="10" min="0"  max="350" value="0" type="range" /></td>
+					</tr>
+
+					<tr>
+                        <td><div class="undertitleConfiguration">Time ( <span id="timeResult" >0</span> )</div></td>
+						<td><input id="time" class="case" min="0"  max="10000" value="0" type="range" /></td>
+					</tr>
+
+					<tr>
+                        <td><div class="undertitleConfiguration">Angle ( <span id="angleResult" >0</span> )</div></td>
+						<td><input id="angle" class="case" min="0"  max="720" value="0" type="range" /></td>
+					</tr>
+
+					<tr>
+                        <td><div class="undertitleConfiguration">Pan ( <span id="panResult" >0</span> )</div></td>
+						<td><input id="pan" class="case" min="0"  max="340" value="25" type="range"  size="60px"/></td>
+					</tr>
+
+					<tr>
+                        <td><div class="undertitleConfiguration">Tilt ( <span id="tiltResult" >0</span> )</div></td>
+						<td><input id="tilt" class="case" min="0"  max="110" value="25" type="range" /></td>
+					</tr>
+
+					<tr>
+                        <td><div class="undertitleConfiguration">Period ( <span id="periodResult" >0</span> )</div></td>
+						<td><input id="period" class="case" min="0"  max="5000" value="0" type="range" /></td>
+					</tr>
+				</table>
+			</section>
+		
+
+			<section id="arrows" class="col-md-6">
+				<div class="row">
+					<div  class="col-md-2 offset-md-3 align-items-center">
+						<input id="reset" type="submit" value="RESET P/T" size="5" maxlength="1"/>
+					</div>
+					<div class="col-md-2 align-items-center">
+						<img id="forward" th:src="@{/images/flecheHaut.png}"  alt="imageflecheHaut"/>
+					</div>
+				</div>
+				<div class="row justify-content-md-center">
+					<div  class="col-md-2 ooo">
+						<img id="left" class="fleche" th:src="@{/images/flecheGauche.png}"  alt="imageflecheGauche"/>
+					</div>
+					<div class="col-md-2">  
+						<img id="stop" th:src="@{/images/stop.png}"  alt="imagestop"/>
+					</div>
+					<div class="col-md-2">
+						<img id="right" th:src="@{/images/flecheDroite.png}"  alt="imageflecheDroite"/>
+					</div>
+				</div>
+				<div class="row justify-content-md-center">
+					<div class="col-md-2">
+						<img id="backward" th:src="@{/images/flecheBas.png}"  alt="imageflecheBas"/>
+					</div>
+				</div>
+			</section>
+
+
+			<section id="buttons" class="col-md-3">
+				<div class="row">
+					<div  class="col-md-12">
+					<table>
+						<tr>
+							<td class="col-md-6 underButton"><label class="undertitleButton" for="off"> R/C OFF </Label></td>
+							<td class="col-md-6 underButton">
+								<label class="switch switch-flat">
+									<input id="off" class="switch-input" type="checkbox" />
+									<span class="switch-label" data-on="On" data-off="Off"></span> 
+									<span class="switch-handle"></span> 
+								</label>
+							</td>
+						</tr>
+					</table>
+					</div>
+				</div>
+
+				<div class="row">
+					<div  class="col-md-12">
+						<table>
+							<tr>
+								<td class="col-md-6 underButton" height="30"><label class="undertitleButton" for="secure"> SECURE </Label></td>
+								<td class="col-md-6 underButton" height="30"><label class="switch switch-flat">
+										<input id="secure" class="switch-input" type="checkbox" />
+										<span class="switch-label" data-on="On" data-off="Off"></span> 
+										<span class="switch-handle"></span> 
+									</label>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div class="row">
+					<div  class="col-md-12">
+
+						<table>
+							<tr>
+								<td class="col-md-6 underButton"><label class="undertitleButton" for="irLeds"> IR LEDs </Label></td>
+								<td class="col-md-6 underButton"><label class="switch switch-flat">
+										<input id="irLeds" class="switch-input" type="checkbox" />
+										<span class="switch-label" data-on="On" data-off="Off"></span> 
+										<span class="switch-handle"></span> 
+									</label>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</section>
+
+		</div>
+	</div>
+</div>
+ 
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="js/events-sender.js"></script>
+
+
+
+
+
+
+<script type="text/javascript">
+var socket = io.connect('http://localhost:3000'); 
+console.log('Connected');
+
+/********************************************************************************/
+/********************************* Mouse events *********************************/
+/********************************************************************************/
+
+var left = document.getElementById('left');
+
+left.addEventListener('click', function() {
+    alert('Frappe de la touche Left !');
+    onLeft(socket);
+});
+
+
+var right = document.getElementById('right');
+
+right.addEventListener('click', function() {
+    alert('Frappe de la touche Right !');
+    onRight(socket);
+});
+
+
+var forward = document.getElementById('forward');
+
+forward.addEventListener('click', function() {
+    console.log('Frappe de la touche Forward !');    
+    onForward(socket);    
+});
+
+
+var backward = document.getElementById('backward');
+
+backward.addEventListener('click', function() {
+    console.log('Frappe de la touche backward !');
+    onBackward(socket);
+});
+
+
+var reset = document.getElementById('reset');
+
+reset.addEventListener('click', function() {
+    console.log('Frappe de la touche Reset !');
+    onReset(socket);
+});
+
+var stop = document.getElementById('stop');
+
+stop.addEventListener('click', function() {
+    console.log('Frappe de la touche Stop !');
+    onStop(socket);
+});
+
+
+/******  R/C OFF ******/
+
+var off = document.getElementById('off');
+var checkRcMode = false;
+off.addEventListener('click', function() {
+
+  if(checkRcMode == false){
+        console.log('true');
+        checkRcMode = true;
+        onRcMode(socket, true);
+    }
+    else{
+        console.log('false');
+        checkRcMode = false;
+        onRcMode(socket, false);
+    }
+        
+    console.log('Frappe bouton off !');
+});
+
+/******  SECURE ******/
+
+var secure = document.getElementById('secure');
+var checkSecure = false;
+secure.addEventListener('click', function() {
+	
+    if(checkSecure == false){
+        console.log('true');
+        checkSecure = true;
+        onMode(socket, true);
+    }
+    else{
+        console.log('false');
+        checkSecure = false;
+        onMode(socket, false);
+    }
+    console.log('Frappe bouton secure !');
+});
+
+/******  IRLEDS ******/
+
+var irLeds = document.getElementById('irLeds');
+var checkLeds = false;
+irLeds.addEventListener('click', function() {
+    if(checkLeds == false){
+        console.log('true');
+        checkLeds = true;
+        onLeds(socket, true);
+    }
+    else{
+        console.log('false');
+        checkLeds = false;
+        onLeds(socket, false);
+    }
+    console.log('Frappe bouton irLeds !');
+});
+
+
+/******* OPTIONS  SLIDER *******/
+
+/****** => AngVel ******/
+
+$('#angVel').on('input', function(){
+    document.getElementById("angVelResult").innerHTML = $('#angVel').val() ;
+});
+
+
+$('#angVel').on('click', function(){
+	console.log("angVel");
+	onAngVel(socket, $('#angVel').val());
+   // $('#angVelResultsss').val($('#angVel').val()); // a enlever qu'a la fin
+});
+/****** => Time ******/
+
+$('#time').on('input', function(){
+    document.getElementById("timeResult").innerHTML = $('#time').val() ;
+});
+
+
+$('#time').on('click', function(){
+	console.log("time");
+	onTime(socket, $('#time').val());
+});
+
+/****** => Angle ******/
+
+$('#angle').on('input', function(){
+    document.getElementById("angleResult").innerHTML = $('#angle').val() ;
+});
+
+
+$('#angle').on('click', function(){
+	console.log("angle");
+	onAngle(socket, $('#angle').val());
+});
+
+/****** => Pan ******/
+$('#pan').on('input', function(){
+    document.getElementById("panResult").innerHTML = $('#pan').val() ;
+});
+
+
+$('#pan').on('click', function(){
+	console.log("pan");
+	onPan(socket, $('#pan').val());
+});
+
+/****** => Tilt ******/
+$('#tilt').on('input', function(){
+    document.getElementById("tiltResult").innerHTML = $('#tilt').val() ;
+});
+
+
+$('#tilt').on('click', function(){
+	console.log("tilt");
+	onTilt(socket, $('#tilt').val());
+});
+
+/****** Period ******/
+$('#period').on('input', function(){
+    document.getElementById("periodResult").innerHTML = $('#period').val() ;
+});
+
+
+$('#period').on('click', function(){
+	console.log("period");
+	onPeriod(socket, $('#period').val());
+});
+
+/********************************************************************************/
+/********************************* keyBoard events ******************************/
+/********************************************************************************/
+
+
+/* FORWARD */
+var forW = document.getElementById("forW").value; 
+/* BACKWARD */
+var backW = document.getElementById("backW").value; 
+/* LEFT */
+var L = document.getElementById("L").value; 
+/* RIGHT */
+var R = document.getElementById("R").value; 
+/* STOP */
+var S = document.getElementById("S").value; 
+/* RESET */
+var RES = document.getElementById("R").value; 
+
+
+
+
+
+
+document.onkeypress=function(event){
+	
+	e = event || window.event;
+    var keyCode = (e.which) ? e.which : event.keyCode;
+
+    //alert(keyCode);
+    eventDirectionStream(keyCode);
+
+}
+
+function eventDirectionStream(keyCode){
+	switch(keyCode){
+
+		case 120 : //32 barre espace // 120 touche x
+			var elmt = document.getElementById("stop");
+			elmt.style.backgroundColor = "deepskyblue";
+			setTimeout(function() {
+				elmt.style.backgroundColor = "darkgray";
+				onStop(socket);
+				console.log("stop");
+			}, 100);
+		 break; 
+
+		case 107 : // 37 touche fleche left //  107 touche k 
+			var elmt = document.getElementById("left");
+			elmt.style.backgroundColor = "deepskyblue";
+			setTimeout(function() {
+				elmt.style.backgroundColor = "darkgray";
+				onLeft(socket);
+				console.log("left");
+			}, 100);
+		 break; 
+
+		case 111 :   //38 touche fleche forward // 111 touche o
+			var elmt = document.getElementById("forward");
+			elmt.style.backgroundColor = "deepskyblue";
+			setTimeout(function() {
+				elmt.style.backgroundColor = "darkgray";
+				onForward(socket);
+				console.log("forward");
+			}, 100); 
+
+		break; 
+
+		case 109 :   //39 touche fleche right // 109 touche m
+			var elmt = document.getElementById("right");
+			elmt.style.backgroundColor = "deepskyblue";
+			setTimeout(function() {
+				elmt.style.backgroundColor = "darkgray";
+				onRight(socket); 
+				console.log("right");
+			}, 100); 
+		break; 
+
+		case 108 :     //40 touche fleche backward //108 touche l
+			var elmt = document.getElementById("backward");
+			elmt.style.backgroundColor = "deepskyblue";
+			setTimeout(function() {
+				elmt.style.backgroundColor = "darkgray";
+				onBackward(socket); 
+				console.log("backward");
+			}, 100); 
+		break;
+
+		case 115 :      //115 touche s
+			var elmt = document.getElementById("reset");
+			elmt.style.backgroundColor = "deepskyblue";
+			setTimeout(function() {
+				elmt.style.backgroundColor = "darkgray";
+				onReset(socket);
+				console.log("reset");
+			}, 100); 
+		break;
+		default : console.log("Test"+keyCode);
+	}
+}
+
+</script>
+
+</body>
+</html>
