@@ -58,7 +58,7 @@
         location.href = "/logout";
     };
     document.getElementById("delete").onclick = function () {
-        var video = /*[[${video}]]*/
+        var video =; /*[[${video}]]*/
         var r = confirm("Do you want to delete this video? This cannot be undone! It will only work if you don't exceed your limit.");
         if (r === true) {
             location.href = "/videos/" + video.robotId + "/" + video.id + "/delete/";
