@@ -1,6 +1,6 @@
 
 body{
-	background-color: dimgray;
+	background-color: lightgrey;
 	font-family: Arial;
 }
 
@@ -35,7 +35,6 @@ body{
 	margin-top: 2px;
 	margin-left: 10px;
 	margin-right: 10px;
-	background-color: lightgrey;
 	/*height: 10%;*/
 }
 
