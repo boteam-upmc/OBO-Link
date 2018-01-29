@@ -36,10 +36,10 @@
 	<div class="container-fluid">
 		<div class="row top">
 
-			<!--<section id="options" class="col-md-2" >
+			<section id="options" class="col-md-2" >
 				<table> -->
 						<!--  Cases to chose the touch who drive the robot  -->
-					<!--<tr>
+					<tr>
 						<td>Forward: </td>
 						<td><input id="forW" type="text" size="5" maxlength="1"/></td>
 					</tr>
@@ -69,14 +69,14 @@
 						<td><input id="RES" type="text" size="5" maxlength="1"/></td>
 					</tr>
 				</table>
-		    </section>-->
+		    </section>
 
 			<section id="live" class="col-md-7 offset-md-2">
 				<div class="row video">
 					<div class="offset-md-0">
-						<video th:src="@{~/videos/cr7.mp4}" controls>
+						<!--<video th:src="@{~/videos/cr7.mp4}" controls>
 							Your browser does not support the video tag. 
-						</video> 
+						</video>-->
 					</div>
 
 				</div>
@@ -253,26 +253,39 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
 
-<script src="http://localhost:3000/socket.io/socket.io.js"></script>
-<script src="js/events-sender.js"></script>
-
-
-
-
+<script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="../js/events-sender.js"></script>
 
 
 <script type="text/javascript">
-var socket = io.connect('http://localhost:3000'); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var socket = io.connect('http://localhost:3000');
 console.log('Connected');
 
-/********************************************************************************/
+    /*onRcMode(socket, true);
+    onMode(socket, true);
+    onAngVel(socket, '20');*/
+
+    /********************************************************************************/
 /********************************* Mouse events *********************************/
 /********************************************************************************/
 
 var left = document.getElementById('left');
 
 left.addEventListener('click', function() {
-    alert('Frappe de la touche Left !');
+    console.log('Frappe de la touche Left !');
     onLeft(socket);
 });
 
@@ -280,7 +293,7 @@ left.addEventListener('click', function() {
 var right = document.getElementById('right');
 
 right.addEventListener('click', function() {
-    alert('Frappe de la touche Right !');
+    console.log('Frappe de la touche Right !');
     onRight(socket);
 });
 
@@ -451,17 +464,17 @@ $('#period').on('click', function(){
 
 
 /* FORWARD */
-var forW = document.getElementById("forW").value; 
+var forW = document.getElementById("forW").value;
 /* BACKWARD */
-var backW = document.getElementById("backW").value; 
+var backW = document.getElementById("backW").value;
 /* LEFT */
-var L = document.getElementById("L").value; 
+var L = document.getElementById("L").value;
 /* RIGHT */
-var R = document.getElementById("R").value; 
+var R = document.getElementById("R").value;
 /* STOP */
-var S = document.getElementById("S").value; 
+var S = document.getElementById("S").value;
 /* RESET */
-var RES = document.getElementById("R").value; 
+var RES = document.getElementById("R").value;
 
 
 
