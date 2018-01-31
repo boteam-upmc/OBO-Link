@@ -36,42 +36,8 @@
 	<div class="container-fluid">
 		<div class="row top">
 
-			<section id="options" class="col-md-2" >
-				<table> -->
-						<!--  Cases to chose the touch who drive the robot  -->
-					<tr>
-						<td>Forward: </td>
-						<td><input id="forW" type="text" size="5" maxlength="1"/></td>
-					</tr>
 
-					<tr>
-						<td>Right: </td>
-						<td><input id="R" type="text" size="5" maxlength="1"/></td>
-					</tr>
-
-					<tr>
-						<td>Left: </td>
-						<td><input id="L" type="text" size="5" maxlength="1"/></td>
-					</tr>
-
-					<tr>
-						<td>Backward: </td>
-						<td><input id="backW" type="text" size="5" maxlength="1"/></td>
-					</tr>
-
-					<tr>
-						<td size="10">Stop: </td>
-						<td><input id="S" type="text" size="5" maxlength="1"/></td>
-					</tr>
-
-					<tr>
-						<td>Reset P/T:</td>
-						<td><input id="RES" type="text" size="5" maxlength="1"/></td>
-					</tr>
-				</table>
-		    </section>
-
-			<section id="live" class="col-md-7 offset-md-2">
+			<section id="live" class="col-md-8 offset-md-2">
 				<div class="row video">
 					<div class="offset-md-0">
 						<!--<video th:src="@{~/videos/cr7.mp4}" controls>
@@ -82,49 +48,10 @@
 				</div>
 			</section>
 
-			<aside id="data" class="col-md-3">
-					<table class="tableData">
-						<tr>
-							<td class="col-md-6 infos">Gaps</td>
-							<td class="col-md-6 infos" >1 0 0 0</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">Falls</td>
-							<td class="col-md-6 infos" >0 0 0 0</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">IRs</td>
-							<td class="col-md-6 infos">24 7 6 4 31 56 35 33 8</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">Pan</td>
-							<td class="col-md-6 infos">6 92 0</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">Tilt</td>
-							<td class="col-md-6 infos">0 4 71600</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">Left</td>
-							<td class="col-md-6 infos">55 0 0</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">Right</td>
-							<td class="col-md-6 infos">40 0 0</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">Battery</td>
-							<td class="col-md-6 infos">702</td>
-						</tr>
-						<tr>
-							<td class="col-md-6 infos">Last status</td>
-							<td class="col-md-6 infos">Thu Jun 02 16:32:05 CEST 2016</td>
-						</tr>
-					</table>
-			</aside>
+
 
 		</div>
-
+		<br/>
 		<div class="row">
 
 			<section id="Configuration" class="col-md-3">
@@ -165,7 +92,8 @@
 			<section id="arrows" class="col-md-6">
 				<div class="row">
 					<div  class="col-md-2 offset-md-3 align-items-center">
-						<input id="reset" type="submit" value="RESET P/T" size="5" maxlength="1"/>
+						<!-- <button id="reset" type="submit" value="RESET P/T" size="5" maxlength="1"/> -->
+						<button id="reset" type="button" class="btn btn-success">RESET P/T</button>
 					</div>
 					<div class="col-md-2 align-items-center">
 						<img id="forward" th:src="@{/images/flecheHaut.png}"  alt="imageflecheHaut"/>
@@ -275,17 +203,16 @@
     /*onRcMode(socket, true);
     onMode(socket, true);
     onAngVel(socket, '20');*/
-
     /********************************************************************************/
-/********************************* Mouse events *********************************/
-/********************************************************************************/
+    /********************************* Mouse events *********************************/
+    /********************************************************************************/
 
-var left = document.getElementById('left');
+    var left = document.getElementById('left');
 
-left.addEventListener('click', function() {
-    console.log('Frappe de la touche Left !');
-    data = { "USER":"teambot", "ROBOT":"123456789"};
-    onLeft(socket, data);
+    left.addEventListener('click', function() {
+        console.log('Frappe de la touche Left !');
+        data = { "USER":"teambot", "ROBOT":"123456789"};
+        onLeft(socket, data);
 });
 
 
@@ -328,8 +255,7 @@ var stop = document.getElementById('stop');
 
 stop.addEventListener('click', function() {
     console.log('Frappe de la touche Stop !');
-    data = { "USER":"teambot", "ROBOT":"123456789"};
-    onStop(socket, data);
+
 });
 
 
@@ -448,17 +374,17 @@ $('#period').on('click', function(){
 
 
 /* FORWARD */
-var forW = document.getElementById("forW").value;
+//var forW = document.getElementById("forW").value;
 /* BACKWARD */
-var backW = document.getElementById("backW").value;
+//var backW = document.getElementById("backW").value;
 /* LEFT */
-var L = document.getElementById("L").value;
+//var L = document.getElementById("L").value;
 /* RIGHT */
-var R = document.getElementById("R").value;
+//var R = document.getElementById("R").value;
 /* STOP */
-var S = document.getElementById("S").value;
+//var S = document.getElementById("S").value;
 /* RESET */
-var RES = document.getElementById("R").value;
+//var RES = document.getElementById("R").value;
 
 
 
@@ -466,7 +392,7 @@ var RES = document.getElementById("R").value;
 
 
 document.onkeypress=function(event){
-	
+
 	e = event || window.event;
     var keyCode = (e.which) ? e.which : event.keyCode;
 
@@ -478,53 +404,58 @@ document.onkeypress=function(event){
 function eventDirectionStream(keyCode){
 	switch(keyCode){
 
-		case 32 : //32 barre espace // 120 touche x
+		case 120 : //32 barre espace // 120 touche x
 			var elmt = document.getElementById("stop");
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-				onStop(socket);
+                data = { "USER":"teambot", "ROBOT":"123456789"};
+                onStop(socket, data);
 				console.log("stop");
 			}, 100);
-		 break; 
+		 break;
 
-		case 37 : // 37 touche fleche left //  107 touche k
+		case 107 : // 37 touche fleche left //  107 touche k
 			var elmt = document.getElementById("left");
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-				onLeft(socket);
+                data = { "USER":"teambot", "ROBOT":"123456789"};
+                onLeft(socket, data);
 				console.log("left");
 			}, 100);
-		 break; 
+		 break;
 
-		case 38 :   //38 touche fleche forward // 111 touche o
+		case 111 :   //38 touche fleche forward // 111 touche o
 			var elmt = document.getElementById("forward");
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-				onForward(socket);
+                data = { "USER":"teambot", "ROBOT":"123456789"};
+                onForward(socket, data);
 				console.log("forward");
-			}, 100); 
+			}, 100);
 
-		break; 
+		break;
 
-		case 39 :   //39 touche fleche right // 109 touche m
+		case 109 :   //39 touche fleche right // 109 touche m
 			var elmt = document.getElementById("right");
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-				onRight(socket); 
+                data = { "USER":"teambot", "ROBOT":"123456789"};
+                onRight(socket, data);
 				console.log("right");
-			}, 100); 
-		break; 
+			}, 100);
+		break;
 
-		case 40 :     //40 touche fleche backward //108 touche l
+		case 108 :     //40 touche fleche backward //108 touche l
 			var elmt = document.getElementById("backward");
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-				onBackward(socket); 
+                data = { "USER":"teambot", "ROBOT":"123456789"};
+                onBackward(socket, data);
 				console.log("backward");
 			}, 100); 
 		break;
@@ -534,7 +465,8 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-				onReset(socket);
+                data = { "USER":"teambot", "ROBOT":"123456789"};
+                onReset(socket, data);
 				console.log("reset");
 			}, 100); 
 		break;
