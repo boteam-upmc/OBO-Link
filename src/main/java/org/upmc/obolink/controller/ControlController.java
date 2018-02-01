@@ -37,16 +37,17 @@ public class ControlController {
      */
     @RequestMapping(value = {"/control/{robotID}"}, method = RequestMethod.GET)
     public ModelAndView control(@PathVariable int robotID) {
+	ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findByUsername(auth.getName());
-        ModelAndView modelAndView = new ModelAndView();
+	//        ModelAndView modelAndView = new ModelAndView();
         if(controlService.checkRobotAndAssociation(robotID, user)){
-            modelAndView.addObject("user", user);
-            modelAndView.addObject("robotID", robotID);
+	    modelAndView.addObject("user", user);
+	    modelAndView.addObject("robotId", robotID);
             modelAndView.setViewName("controlRobotLive");
             return modelAndView;
-        }
-        return new ModelAndView("redirect:/videos/"+robotID);
+	}
+	return new ModelAndView("redirect:/videos/"+robotID);
     }
 
 
