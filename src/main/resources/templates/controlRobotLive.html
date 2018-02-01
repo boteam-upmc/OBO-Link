@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
 
-<link rel="stylesheet" type="text/css" th:href="@{/css/controlRobotLive.css}" media="screen" />
+<link rel="stylesheet" type="text/css" th:href="/css/controlRobotLive.css" media="screen" />
 
 </head>
 
@@ -200,6 +200,9 @@
 	var socket = io.connect('http://localhost:1337');
 	console.log('Connected');
 
+    var user = /*[[${videos}]]*/ 'user';
+    var robotId = /*[[${robotId}]]*/ 'robotId';
+
     /*onRcMode(socket, true);
     onMode(socket, true);
     onAngVel(socket, '20');*/
@@ -211,7 +214,7 @@
 
     left.addEventListener('click', function() {
         console.log('Frappe de la touche Left !');
-        data = { "USER":"teambot", "ROBOT":"123456789"};
+        data = { "USER":""+user.id, "ROBOT":""+robotId};
         onLeft(socket, data);
 });
 
@@ -220,7 +223,7 @@ var right = document.getElementById('right');
 
 right.addEventListener('click', function() {
     console.log('Frappe de la touche Right !');
-    data = { "USER":"teambot", "ROBOT":"123456789"};
+    data = { "USER":""+user.id, "ROBOT":""+robotId};
     onRight(socket, data);
 });
 
@@ -229,7 +232,7 @@ var forward = document.getElementById('forward');
 
 forward.addEventListener('click', function() {
     console.log('Frappe de la touche Forward !');
-    data = { "USER":"teambot", "ROBOT":"123456789"};
+    data = { "USER":""+user.id, "ROBOT":""+robotId};
     onForward(socket, data);
 });
 
@@ -238,7 +241,7 @@ var backward = document.getElementById('backward');
 
 backward.addEventListener('click', function() {
     console.log('Frappe de la touche backward !');
-    data = { "USER":"teambot", "ROBOT":"123456789"};
+    data = { "USER":""+user.id, "ROBOT":""+robotId};
     onBackward(socket, data);
 });
 
@@ -247,7 +250,7 @@ var reset = document.getElementById('reset');
 
 reset.addEventListener('click', function() {
     console.log('Frappe de la touche Reset !');
-    data = { "USER":"teambot", "ROBOT":"123456789"};
+    data = { "USER":""+user.id, "ROBOT":""+robotId};
     onReset(socket, data);
 });
 
@@ -266,7 +269,7 @@ var checkRcMode = false;
     off.addEventListener('click', function() {
         checkRcMode = !checkRcMode
         console.log('Frappe bouton off ! ' + checkRcMode);
-        data = { "USER":"teambot", "ROBOT":"123456789", "IS_CHECKED" : checkRcMode};
+        data = { "USER":""+user.id, "ROBOT":""+robotId, "IS_CHECKED" : checkRcMode};
         onRcMode(socket, data);
     });
 
@@ -277,7 +280,7 @@ var checkSecure = false;
 secure.addEventListener('click', function() {
 	checkSecure = !checkSecure
 	console.log('Frappe bouton secure ! ' + checkSecure);
-	data = { "USER":"teambot", "ROBOT":"123456789", "IS_CHECKED" : checkSecure};
+    data = { "USER":""+user.id, "ROBOT":""+robotId, "IS_CHECKED" : checkSecure};
 	onMode(socket, data);
 });
 
@@ -288,7 +291,7 @@ var checkLeds = false;
 irLeds.addEventListener('click', function() {
 	checkLeds = !checkLeds
 	console.log('Frappe bouton irLeds ! ' + checkLeds);
-	data = { "USER":"teambot", "ROBOT":"123456789", "IS_CHECKED" : checkLeds};
+    data = { "USER":""+user.id, "ROBOT":""+robotId, "IS_CHECKED" : checkLeds};
 	onLeds(socket, data);
 });
 
@@ -304,7 +307,7 @@ $('#angVel').on('input', function(){
 
 $('#angVel').on('click', function(){
 	console.log("angVel");
-    data = { "USER":"teambot", "ROBOT":"123456789", "PROGRESS" : $('#angVel').val()};
+    data = { "USER":""+user.id, "ROBOT":""+robotId, "PROGRESS" : $('#angVel').val()};
     onAngVel(socket, data);});
 /****** => Time ******/
 
@@ -315,7 +318,7 @@ $('#time').on('input', function(){
 
 $('#time').on('click', function(){
 	console.log("time");
-    data = { "USER":"teambot", "ROBOT":"123456789", "PROGRESS" : $('#time').val()};
+    data = { "USER":""+user.id, "ROBOT":""+robotId "PROGRESS" : $('#time').val()};
     onTime(socket, data);
 });
 
@@ -328,7 +331,7 @@ $('#angle').on('input', function(){
 
 $('#angle').on('click', function(){
 	console.log("angle");
-    data = { "USER":"teambot", "ROBOT":"123456789", "PROGRESS" : $('#angle').val()};
+    data = { "USER":""+user.id, "ROBOT":""+robotId, "PROGRESS" : $('#angle').val()};
     onAngle(socket, data);
 });
 
@@ -340,7 +343,7 @@ $('#pan').on('input', function(){
 
 $('#pan').on('click', function(){
 	console.log("pan");
-    data = { "USER":"teambot", "ROBOT":"123456789", "PROGRESS" : $('#pan').val()};
+    data = { "USER":""+user.id, "ROBOT":""+robotId, "PROGRESS" : $('#pan').val()};
     onPan(socket, data);
 });
 
@@ -352,7 +355,7 @@ $('#tilt').on('input', function(){
 
 $('#tilt').on('click', function(){
 	console.log("tilt");
-    data = { "USER":"teambot", "ROBOT":"123456789", "PROGRESS" : $('#tilt').val()};
+    data = { "USER":""+user.id, "ROBOT":""+robotId, "PROGRESS" : $('#tilt').val()};
     onTilt(socket, data);
 });
 
@@ -364,7 +367,7 @@ $('#period').on('input', function(){
 
 $('#period').on('click', function(){
 	console.log("period");
-    data = { "USER":"teambot", "ROBOT":"123456789", "PROGRESS" : $('#period').val()};
+    data = { "USER":""+user.id, "ROBOT":""+robotId, "PROGRESS" : $('#period').val()};
     onPeriod(socket, data);
 });
 
@@ -409,7 +412,7 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-                data = { "USER":"teambot", "ROBOT":"123456789"};
+                data = { "USER":""+user.id, "ROBOT":""+robotId};
                 onStop(socket, data);
 				console.log("stop");
 			}, 100);
@@ -420,7 +423,7 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-                data = { "USER":"teambot", "ROBOT":"123456789"};
+                data = { "USER":""+user.id, "ROBOT":""+robotId};
                 onLeft(socket, data);
 				console.log("left");
 			}, 100);
@@ -431,7 +434,7 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-                data = { "USER":"teambot", "ROBOT":"123456789"};
+                data = { "USER":""+user.id, "ROBOT":""+robotId};
                 onForward(socket, data);
 				console.log("forward");
 			}, 100);
@@ -443,7 +446,7 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-                data = { "USER":"teambot", "ROBOT":"123456789"};
+                data = { "USER":""+user.id, "ROBOT":""+robotId};
                 onRight(socket, data);
 				console.log("right");
 			}, 100);
@@ -454,7 +457,7 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-                data = { "USER":"teambot", "ROBOT":"123456789"};
+                data = { "USER":""+user.id, "ROBOT":""+robotId};
                 onBackward(socket, data);
 				console.log("backward");
 			}, 100); 
@@ -465,7 +468,7 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
-                data = { "USER":"teambot", "ROBOT":"123456789"};
+                data = { "USER":""+user.id, "ROBOT":""+robotId};
                 onReset(socket, data);
 				console.log("reset");
 			}, 100); 
