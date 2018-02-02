@@ -72,12 +72,12 @@
 					</tr>
 
 					<tr>
-                        <td><div class="undertitleConfiguration">Pan ( <span id="panResult" >0</span> )</div></td>
+                        <td><div class="undertitleConfiguration">Pan ( <span id="panResult" >25</span> )</div></td>
 						<td><input id="pan" class="case" min="0"  max="340" value="25" type="range"  size="60px"/></td>
 					</tr>
 
 					<tr>
-                        <td><div class="undertitleConfiguration">Tilt ( <span id="tiltResult" >0</span> )</div></td>
+                        <td><div class="undertitleConfiguration">Tilt ( <span id="tiltResult" >25</span> )</div></td>
 						<td><input id="tilt" class="case" min="0"  max="110" value="25" type="range" /></td>
 					</tr>
 
@@ -205,12 +205,11 @@
 
     console.log('' + user.id + '/' + robotId);
 
-    /*onRcMode(socket, true);
-    onMode(socket, true);
-    onAngVel(socket, '20');*/
-    /********************************************************************************/
-    /********************************* Mouse events *********************************/
-    /********************************************************************************/
+
+
+	 	var checkRc = false;
+   	var checkS = false;
+   	var checkI = false;
 
     var left = document.getElementById('left');
 
@@ -218,7 +217,7 @@
         console.log('Frappe de la touche Left !');
         data = { "USER":""+user.id, "ROBOT":""+robotId};
         onLeft(socket, data);
-});
+		});
 
 
 var right = document.getElementById('right');
@@ -229,15 +228,13 @@ right.addEventListener('click', function() {
     onRight(socket, data);
 });
 
-
 var forward = document.getElementById('forward');
 
 forward.addEventListener('click', function() {
-    console.log('Frappe de la touche Forward !');
-    data = { "USER":""+user.id, "ROBOT":""+robotId};
-    onForward(socket, data);
+		console.log('Frappe de la touche Forward !');
+		data = { "USER":""+user.id, "ROBOT":""+robotId};
+		onForward(socket, data);
 });
-
 
 var backward = document.getElementById('backward');
 
@@ -252,6 +249,22 @@ var reset = document.getElementById('reset');
 
 reset.addEventListener('click', function() {
     console.log('Frappe de la touche Reset !');
+		document.getElementById("angVelResult").innerHTML = 0 ;
+   $('#angVel').val(0);
+   document.getElementById("timeResult").innerHTML = 0 ;
+   $('#time').val(0);
+   document.getElementById("angleResult").innerHTML = 0 ;
+   $('#angle').val(0);
+   document.getElementById("panResult").innerHTML = 0 ;
+   $('#pan').val(0);
+   document.getElementById("tiltResult").innerHTML = 0 ;
+   $('#tilt').val(0);
+   document.getElementById("periodResult").innerHTML = 0 ;
+   $('#period').val(0);
+
+		(checkRc) ? $('#off').trigger('click') : console.log("checkRc : "+checkRc);
+   	(checkS) ? $('#secure').trigger('click') : console.log("checkS : "+checkS);
+   	(checkI) ? $('#irLeds').trigger('click') : console.log("checkI : "+checkI);
     data = { "USER":""+user.id, "ROBOT":""+robotId};
     onReset(socket, data);
 });
@@ -270,7 +283,8 @@ stop.addEventListener('click', function() {
 var off = document.getElementById('off');
 var checkRcMode = false;
     off.addEventListener('click', function() {
-        checkRcMode = !checkRcMode
+        checkRcMode = !checkRcMode;
+				checkRc = checkRcMode;
         console.log('Frappe bouton off ! ' + checkRcMode);
         data = { "USER":""+user.id, "ROBOT":""+robotId, "IS_CHECKED" : checkRcMode};
         onRcMode(socket, data);
@@ -281,7 +295,8 @@ var checkRcMode = false;
 var secure = document.getElementById('secure');
 var checkSecure = false;
 secure.addEventListener('click', function() {
-	checkSecure = !checkSecure
+	checkSecure = !checkSecure;
+	checkS = checkSecure;
 	console.log('Frappe bouton secure ! ' + checkSecure);
     data = { "USER":""+user.id, "ROBOT":""+robotId, "IS_CHECKED" : checkSecure};
 	onMode(socket, data);
@@ -292,12 +307,12 @@ secure.addEventListener('click', function() {
 var irLeds = document.getElementById('irLeds');
 var checkLeds = false;
 irLeds.addEventListener('click', function() {
-	checkLeds = !checkLeds
+	checkLeds = !checkLeds;
+	checkI = checkLeds;
 	console.log('Frappe bouton irLeds ! ' + checkLeds);
     data = { "USER":""+user.id, "ROBOT":""+robotId, "IS_CHECKED" : checkLeds};
 	onLeds(socket, data);
 });
-
 
 /******* OPTIONS  SLIDER *******/
 
@@ -311,7 +326,8 @@ $('#angVel').on('input', function(){
 $('#angVel').on('click', function(){
 	console.log("angVel");
     data = { "USER":""+user.id, "ROBOT":""+robotId, "PROGRESS" : $('#angVel').val()};
-    onAngVel(socket, data);});
+    onAngVel(socket, data);
+	});
 /****** => Time ******/
 
 $('#time').on('input', function(){
@@ -471,6 +487,24 @@ function eventDirectionStream(keyCode){
 			elmt.style.backgroundColor = "deepskyblue";
 			setTimeout(function() {
 				elmt.style.backgroundColor = "darkgray";
+				document.getElementById("angVelResult").innerHTML = 0 ;
+								$('#angVel').val(0);
+								document.getElementById("timeResult").innerHTML = 0 ;
+								$('#time').val(0);
+								document.getElementById("angleResult").innerHTML = 0 ;
+								$('#angle').val(0);
+								document.getElementById("panResult").innerHTML = 0 ;
+								$('#pan').val(0);
+								document.getElementById("tiltResult").innerHTML = 0 ;
+								$('#tilt').val(0);
+								document.getElementById("periodResult").innerHTML = 0 ;
+								$('#period').val(0);
+
+
+
+								(checkRc) ? $('#off').trigger('click') : console.log("checkRc : "+checkRc);
+								(checkS) ? $('#secure').trigger('click') : console.log("checkS : "+checkS);
+								(checkI) ? $('#irLeds').trigger('click') : console.log("checkI : "+checkI);
                 data = { "USER":""+user.id, "ROBOT":""+robotId};
                 onReset(socket, data);
 				console.log("reset");
